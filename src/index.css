@@ -1,13 +1,99 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+  --color-primary: #0059b3;
+  /* --color-secondary: hsl(210, 100%, 50%); */
+  --color-bg-footer: #b3b3b3;
+  --color-fg-footer: #333;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 1.2rem;
+}
+
+
+header, main, footer {
+  width: 100%;
+}
+
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 75rem;
+  padding: 0 1rem;
+}
+
+
+header {
+  background-color: var(--color-primary);
+  height: 6rem;
+}
+
+.header-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+footer {
+  background-color: var(--color-bg-footer);
+  color: var(--color-fg-footer);
+  font-size: 1.05rem;
+  padding: 0.7rem 0;
+}
+
+.footer-inner {
+  width: fit-content;
+}
+
+footer a, footer a:hover, footer a:visited {
+  text-decoration: none;
+  color: var(--color-fg-footer);
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+
+.main-inner {
+  background-color: white;
+  padding: 4rem 0;
+}
+
+
+h1 {
+  margin: 0 0 0 1rem;
+  font-size: 3rem;
+  font-weight: 600;
+  color: white;
+}
+
+
+@media screen and (max-width: 900px) {
+  header {
+    height: 4rem;
+  }
+
+  body {
+    font-size: 1rem;
+  }
+
+  .main-inner {
+    background-color: white;
+    padding: 2.5rem 0;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  footer {
+    font-size: 0.95rem;
+  }
 }
