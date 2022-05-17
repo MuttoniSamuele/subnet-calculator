@@ -60,10 +60,13 @@ footer a:hover {
   text-decoration: underline;
 }
 
-
 .main-inner {
-  background-color: white;
   padding: 4rem 0;
+}
+
+section {
+  max-width: 85%;
+  margin: 0 auto;
 }
 
 
@@ -72,6 +75,34 @@ h1 {
   font-size: 3rem;
   font-weight: 600;
   color: white;
+}
+
+
+.inputs-wrapper {
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; */
+}
+
+.input-wrapper {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+
+.input-label {
+  display: inline-block;
+  font-size: 1.2rem;
+  margin-right: 0.5rem;
+}
+
+.input-wrapper input {
+  display: inline-block;
+  width: 4rem;
+  margin: 0 0.2rem;
+  padding: 0.1rem;
+  text-align: center;
+  font-size: inherit;
 }
 
 
@@ -85,7 +116,6 @@ h1 {
   }
 
   .main-inner {
-    background-color: white;
     padding: 2.5rem 0;
   }
 
