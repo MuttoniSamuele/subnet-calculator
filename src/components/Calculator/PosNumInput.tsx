@@ -2,7 +2,8 @@ import React, { useState } from "react";
 
 interface Props {
   label: string;
-  onChange: (num: number) => void;
+  max?: number;
+  onChange: (num: number | null) => void;
 }
 
 const PosNumInput: React.FC<Props> = (props) => {
@@ -12,11 +13,11 @@ const PosNumInput: React.FC<Props> = (props) => {
     let newNum: number | null = parseInt(e.target.value);
     if (e.target.value.length === 0) {
       newNum = null;
-    } else if (isNaN(newNum) || newNum <= 0) {
+    } else if (isNaN(newNum) || isNaN(Number(e.target.value)) ||
+               newNum <= 0 || (props.max && newNum > props.max)) {
       return;
-    } else {
-      props.onChange(newNum);
     }
+    props.onChange(newNum);
     setNum(newNum);
   }
 

@@ -2,8 +2,7 @@ import React, { useState } from "react";
 
 interface Props {
   label: string;
-  isMask?: boolean;
-  onChange: (octects: number[]) => void;
+  onChange: (octects: number[] | null) => void;
 }
 
 const IpInput: React.FC<Props> = (props) => {
@@ -21,13 +20,15 @@ const IpInput: React.FC<Props> = (props) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, octectIndex: number): void => {
     const octect = strToOctect(e.target.value);
-    if (octect === null && e.target.value.length > 0) {
+    if ((octect === null || isNaN(Number(e.target.value))) && e.target.value.length > 0) {
       return;
     }
     const octectsTemp = [...octects];
     octectsTemp[octectIndex] = octect;
     if (!octectsTemp.some((o) => o === null)) {
       props.onChange(octectsTemp as number[]);
+    } else {
+      props.onChange(null);
     }
     setOctects(octectsTemp);
   }
