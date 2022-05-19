@@ -1,12 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 interface Props {
   label: string;
+  value?: number[] | null;
+  disabled?: boolean
   onChange: (octects: number[] | null) => void;
 }
 
 const IpInput: React.FC<Props> = (props) => {
-  const [octects, setOctects] = useState<(number | null)[]>(Array(4).fill(null));
+  const [octects, setOctects] = useState<(number | null)[]>(
+    props.value ? props.value as (number | null)[] : Array(4).fill(null)
+  );
+
+  useEffect(() => {
+    if (props.value !== undefined) {
+      setOctects(props.value !== null ? props.value as (number | null)[] : Array(4).fill(null));
+    }
+  }, [props.value]);
 
   // Converts the given string to an acceptable octect.
   // Returns null if the octect is not acceptable.
@@ -41,6 +51,7 @@ const IpInput: React.FC<Props> = (props) => {
           <input
             type="text"
             value={octect !== null ? octect : ""}
+            disabled={props.disabled}
             onChange={(e) => handleChange(e, i)}
           />
           {i < octects.length-1 && "."}
