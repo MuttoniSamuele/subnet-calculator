@@ -4,7 +4,7 @@ import PosNumInput from "./PosNumInput";
 import { decToBin, binToDec } from "../../logics/binary";
 
 interface Props {
-  onCalculate: (netAddr: number[], maskBits: number) => void;
+  onCalculate: (netAddr: number[], subnetId: number, hostId: number) => void;
 }
 
 const InputsController: React.FC<Props> = (props) => {
@@ -112,13 +112,12 @@ const InputsController: React.FC<Props> = (props) => {
       return;
     }
     const netAddr = [...ipAddr];
-    const maskBits = netId + subnetId;
     for (let i = 0; i < 4; i++) {
-      if (maskBits <= i*8) {
+      if (netId <= i*8) {
         netAddr[i] = 0;
       }
     }
-    props.onCalculate(netAddr, maskBits);
+    props.onCalculate(netAddr, subnetId, 32 - netId - subnetId);
   }
 
   return (

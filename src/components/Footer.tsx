@@ -5,7 +5,11 @@ const Footer: React.FC = () => {
     <footer>
       <div className="footer-inner container">
         <span>Website realized by Muttoni Samuele | </span>
-        <a href="https://github.com/MuttoniSamuele/subnet-calculator" target="_blank">Source Code</a>
+        <a
+          href="https://github.com/MuttoniSamuele/subnet-calculator"
+          target="_blank"
+          rel="noreferrer"
+        >Source Code</a>
       </div>
     </footer>
   );

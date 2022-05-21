@@ -65,12 +65,12 @@ main {
 }
 
 .main-inner {
-  padding: 4rem 0;
+  padding: 0;
 }
 
 section {
   max-width: 85%;
-  margin: 0 auto;
+  margin: 4rem auto;
 }
 
 
@@ -107,6 +107,42 @@ h1 {
   padding: 0.1rem;
   text-align: center;
   font-size: inherit;
+}
+
+
+.subnets-desc {
+  margin-bottom: 1rem;
+}
+
+.subnets-table {
+  display: table;
+}
+
+.subnets-table .row {
+  display: table-row;
+}
+
+.subnets-table .row.heading {
+  font-weight: bold;
+}
+
+.subnets-table .cell {
+  display: table-cell;
+  border: 1px black inset;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border-left: 0;
+  border-top: 0;
+  padding: 0.1rem 1rem;
+  text-align: center;
+}
+
+.subnets-table .cell:first-child {
+  border-left: 1px black solid;
+}
+
+.subnets-table .row.heading .cell {
+  border-top: 1px black solid;
 }
 
 
