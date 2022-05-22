@@ -1,12 +1,17 @@
 :root {
   --color-primary: #0059b3;
-  /* --color-secondary: hsl(210, 100%, 50%); */
+  --color-secondary: hsl(210, 100%, 50%);
+  --color-disabled: hsl(0, 0%, 71%);
   --color-bg-footer: #b3b3b3;
   --color-fg-footer: #333;
 }
 
 *, *::before, *::after {
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -82,6 +87,42 @@ h1 {
 }
 
 
+.go-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  border: 0;
+  margin: 0;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s opacity;
+  cursor: pointer;
+}
+
+.go-to-top.hidden {
+  opacity: 0;
+  cursor: default;
+}
+
+.go-to-top:hover, .go-to-top:active {
+  background-color: var(--color-secondary);
+}
+
+.arrow-up {
+  border: solid white;
+  border-width: 0 0.3rem 0.3rem 0;
+  display: inline-block;
+  padding: 0.3rem;
+  transform: rotate(-135deg);
+}
+
+
 .inputs-wrapper {
   /* display: flex;
   flex-direction: column;
@@ -128,7 +169,7 @@ h1 {
 
 .subnets-table .cell {
   display: table-cell;
-  border: 1px black inset;
+  border: 1px inset black;
   border-collapse: collapse;
   border-spacing: 0;
   border-left: 0;
@@ -138,11 +179,11 @@ h1 {
 }
 
 .subnets-table .cell:first-child {
-  border-left: 1px black solid;
+  border-left: 1px solid black;
 }
 
 .subnets-table .row.heading .cell {
-  border-top: 1px black solid;
+  border-top: 1px solid black;
 }
 
 
