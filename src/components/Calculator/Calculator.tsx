@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import InputsController from "./InputsController";
-import SubnetsTable from "./SubnetTable";
+import SubnetsTable from "./SubnetsTable";
 
 const Calculator: React.FC = () => {
   const [netAddr, setNetAddr] = useState<number[]>();
