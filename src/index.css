@@ -1,9 +1,10 @@
 :root {
   --color-primary: #0059b3;
-  --color-secondary: hsl(210, 100%, 50%);
-  --color-disabled: hsl(0, 0%, 71%);
+  --color-secondary: #0080ff;
+  --color-secondary-light: #5cadff;
+  --color-disabled: #999999;
   --color-bg-footer: #b3b3b3;
-  --color-fg-footer: #333;
+  --color-fg-footer: #1a1a1a;
 }
 
 *, *::before, *::after {
@@ -20,6 +21,12 @@ body {
   font-size: 1.2rem;
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 
 header, main, footer {
   width: 100%;
@@ -31,7 +38,6 @@ header, main, footer {
   max-width: 75rem;
   padding: 0 1rem;
 }
-
 
 header {
   background-color: var(--color-primary);
@@ -46,10 +52,11 @@ header {
 }
 
 footer {
+  margin-top: auto;
   background-color: var(--color-bg-footer);
   color: var(--color-fg-footer);
   font-size: 1.05rem;
-  padding: 0.7rem 0;
+  padding: 1rem 0;
 }
 
 .footer-inner {
@@ -65,19 +72,14 @@ footer a:hover {
   text-decoration: underline;
 }
 
-main {
-  /* min-height: 90vh; */
-}
-
 .main-inner {
   padding: 0;
 }
 
 section {
   max-width: 85%;
-  margin: 4rem auto;
+  margin: 4rem auto 3rem auto;
 }
-
 
 h1 {
   margin: 0 0 0 1rem;
@@ -103,6 +105,7 @@ h1 {
   align-items: center;
   transition: 0.3s opacity;
   cursor: pointer;
+  z-index: 10;
 }
 
 .go-to-top.hidden {
@@ -122,13 +125,6 @@ h1 {
   transform: rotate(-135deg);
 }
 
-
-.inputs-wrapper {
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; */
-}
 
 .input-wrapper {
   font-size: 1rem;
@@ -150,6 +146,33 @@ h1 {
   font-size: inherit;
 }
 
+.input-wrapper input.large {
+  width: 6rem;
+}
+
+.calculate-btn {
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  padding: 0.5rem 0.8rem;
+  margin-top: 0.7rem;
+  font-size: inherit;
+  cursor: pointer;
+}
+
+.calculate-btn:hover:not(.calculate-btn:disabled) {
+  background-color: var(--color-secondary);
+}
+
+.calculate-btn:active:not(.calculate-btn:disabled) {
+  background-color: var(--color-secondary-light);
+}
+
+.calculate-btn:disabled {
+  background-color: var(--color-disabled);
+  cursor: default;
+}
+
 
 .subnets-desc {
   margin-bottom: 1rem;
@@ -163,6 +186,7 @@ h1 {
 
 .subnets-table {
   display: table;
+  border-radius: 1rem;
 }
 
 .subnets-table .row {
@@ -185,16 +209,26 @@ h1 {
 }
 
 .subnets-table .cell:first-child {
-  border-left: 1px solid black;
+  border-left: 1px inset black;
 }
 
 .subnets-table .row.heading .cell {
-  border-top: 1px solid black;
+  border-top: 1px inset black;
 }
 
 .show-more-btn {
   display: block;
-  margin: 0 auto;
+  margin: 0.8rem auto 0 auto;
+  background-color: transparent;
+  color: black;
+  border: none;
+  font-size: 1.05rem;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.show-more-btn:hover {
+  text-decoration: none;
 }
 
 

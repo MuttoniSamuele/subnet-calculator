@@ -4,7 +4,8 @@ interface Props {
   label: string;
   value?: number | null;
   max?: number;
-  disabled?: boolean
+  disabled?: boolean;
+  large?: boolean;
   onChange: (num: number | null) => void;
 }
 
@@ -35,6 +36,7 @@ const PosNumInput: React.FC<Props> = (props) => {
     <div className="input-wrapper">
       <div className="input-label">{props.label}</div>
       <input
+        className={props.large ? "large" : ""}
         type="text"
         value={num !== null ? num : ""}
         disabled={props.disabled}

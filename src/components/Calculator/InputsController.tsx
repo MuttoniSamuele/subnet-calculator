@@ -122,67 +122,68 @@ const InputsController: React.FC<Props> = (props) => {
 
   return (
     <section>
-      <div className="inputs-wrapper">
-        <IpInput
-          label="IP Address"
-          onChange={(ip) => {
-            setFocusedInput(InputType.IP_ADDR);
-            handleIpChange(ip);
-          }}
-        />
-        <PosNumInput
-          label="Mask Bits"
-          value={focusedInput === InputType.MASK_BITS ? undefined
-            : hasMaskBits ? netId+subnetId
-            : null
-          }
-          max={30}
-          disabled={netId === null}
-          onChange={(bits) => {
-            setFocusedInput(InputType.MASK_BITS);
-            handleMaskBitsChange(bits);
-          }}
-        />
-        <IpInput
-          label="Subnet Mask"
-          value={focusedInput === InputType.SUB_MASK ? undefined
-            : hasMaskBits ? calcSubnetMask(netId, subnetId)
-            : null
-          }
-          disabled={netId === null}
-          onChange={(mask) => {
-            setFocusedInput(InputType.SUB_MASK);
-            handleSubMaskChange(mask);
-          }}
-        />
-        <PosNumInput
-          label="Number of Subnets"
-          value={focusedInput === InputType.SUBNETS ? undefined
-            : hasMaskBits ? Math.pow(2, subnetId)
-            : null
-          }
-          max={Math.pow(2, 32)}
-          disabled={netId === null}
-          onChange={(subnets) => {
-            setFocusedInput(InputType.SUBNETS);
-            handleSubnetsChange(subnets);
-          }}
-        />
-        <PosNumInput
-          label="Hosts per Subnet"
-          value={focusedInput === InputType.HOSTS ? undefined
-            : hasMaskBits ? Math.pow(2, 32-netId-subnetId)-3
-            : null
-          }
-          max={Math.pow(2, 32)}
-          disabled={netId === null}
-          onChange={(hosts) => {
-            setFocusedInput(InputType.HOSTS);
-            handleHostsChange(hosts);
-          }}
-        />
-      </div>
+      <IpInput
+        label="IP Address"
+        onChange={(ip) => {
+          setFocusedInput(InputType.IP_ADDR);
+          handleIpChange(ip);
+        }}
+      />
+      <PosNumInput
+        label="Mask Bits"
+        value={focusedInput === InputType.MASK_BITS ? undefined
+          : hasMaskBits ? netId+subnetId
+          : null
+        }
+        max={30}
+        disabled={netId === null}
+        onChange={(bits) => {
+          setFocusedInput(InputType.MASK_BITS);
+          handleMaskBitsChange(bits);
+        }}
+      />
+      <IpInput
+        label="Subnet Mask"
+        value={focusedInput === InputType.SUB_MASK ? undefined
+          : hasMaskBits ? calcSubnetMask(netId, subnetId)
+          : null
+        }
+        disabled={netId === null}
+        onChange={(mask) => {
+          setFocusedInput(InputType.SUB_MASK);
+          handleSubMaskChange(mask);
+        }}
+      />
+      <PosNumInput
+        label="Number of Subnets"
+        value={focusedInput === InputType.SUBNETS ? undefined
+          : hasMaskBits ? Math.pow(2, subnetId)
+          : null
+        }
+        max={Math.pow(2, 32)}
+        disabled={netId === null}
+        large
+        onChange={(subnets) => {
+          setFocusedInput(InputType.SUBNETS);
+          handleSubnetsChange(subnets);
+        }}
+      />
+      <PosNumInput
+        label="Hosts per Subnet"
+        value={focusedInput === InputType.HOSTS ? undefined
+          : hasMaskBits ? Math.pow(2, 32-netId-subnetId)-3
+          : null
+        }
+        max={Math.pow(2, 32)}
+        disabled={netId === null}
+        large
+        onChange={(hosts) => {
+          setFocusedInput(InputType.HOSTS);
+          handleHostsChange(hosts);
+        }}
+      />
       <button
+        className="calculate-btn"
         disabled={ipAddr === null || !hasMaskBits}
         onClick={handleCalculate}
       >
