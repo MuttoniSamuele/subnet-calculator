@@ -28,23 +28,25 @@ const SubnetsTable: React.FC<Props> = (props) => {
         }
       </div>
 
-      <div className="table-wrapper">
-        <div className="subnets-table">
-          <div className="row heading">
-            <div className="cell">Subnet</div>
-            <div className="cell">Network address</div>
-            <div className="cell">First host</div>
-            <div className="cell">Last host</div>
-            <div className="cell">Broadcast address</div>
+      <div className="table-container">
+        <div className="table-wrapper">
+          <div className="subnets-table">
+            <div className="row heading">
+              <div className="cell">Subnet</div>
+              <div className="cell">Network address</div>
+              <div className="cell">First host</div>
+              <div className="cell">Last host</div>
+              <div className="cell">Broadcast address</div>
+            </div>
+            {[...Array(subnetsCnt > maxSubnets ? maxSubnets : subnetsCnt)].map((v, i) => 
+              <SubnetItem
+                key={i}
+                netAddr={props.netAddr}
+                hostId={props.hostId}
+                subnetIndex={i}
+              />
+            )}
           </div>
-          {[...Array(subnetsCnt > maxSubnets ? maxSubnets : subnetsCnt)].map((v, i) => 
-            <SubnetItem
-              key={i}
-              netAddr={props.netAddr}
-              hostId={props.hostId}
-              subnetIndex={i}
-            />
-          )}
         </div>
 
         {subnetsCnt > maxSubnets &&

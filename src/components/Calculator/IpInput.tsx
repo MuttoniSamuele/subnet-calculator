@@ -46,17 +46,16 @@ const IpInput: React.FC<Props> = (props) => {
   return (
     <div className="input-wrapper">
       <div className="input-label">{props.label}</div>
-      {octects.map((octect, i) =>
-        <React.Fragment key={i}>
-          <input
-            type="text"
-            value={octect !== null ? octect : ""}
-            disabled={props.disabled}
-            onChange={(e) => handleChange(e, i)}
-          />
-          {i < octects.length-1 && "."}
-        </React.Fragment>
-      )}
+        {octects.map((octect, i) =>
+          <React.Fragment key={i}>
+            <input
+              type="text"
+              value={octect !== null ? octect : ""}
+              disabled={props.disabled}
+              onChange={(e) => handleChange(e, i)}
+            />
+          </React.Fragment>
+        )}
     </div>
   );
 }
