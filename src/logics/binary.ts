@@ -1,12 +1,12 @@
-export type byte = (0 | 1)[];
+export type Byte = (0 | 1)[];
 
 // Converts a given number to binary as a byte type.
 // If the minBits parameter is specified fills the byte with minBits zeros.
-export function decToBin(dec: number, minBits?: number): byte {
+export function decToBin(dec: number, minBits?: number): Byte {
   if (minBits === undefined) {
     minBits = 0;
   }
-  const bin: byte = [];
+  const bin: Byte = [];
   do {
     bin.push((dec % 2) as (0 | 1));
     dec = Math.floor(dec / 2);
@@ -16,7 +16,7 @@ export function decToBin(dec: number, minBits?: number): byte {
 }
 
 // Converts a given number of type byte to decimal.
-export function binToDec(bin: byte): number {
+export function binToDec(bin: Byte): number {
   let dec = 0;
   bin.forEach((bit, i) => {
     dec += bit * Math.pow(2, bin.length-i-1);

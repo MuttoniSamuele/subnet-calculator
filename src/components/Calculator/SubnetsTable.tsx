@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SubnetItem from "./SubnetItem";
+import { calcSubnet, addrToStr } from "../../logics/addrUtils";
 
 const MAX_SUBNETS = 128; // max number of subnets to load at a time
 
@@ -16,6 +17,17 @@ const SubnetsTable: React.FC<Props> = (props) => {
   useEffect(() => {
     setMaxSubnets(MAX_SUBNETS);
   }, [props.netAddr, props.subnetId]);
+
+  const buildSubnetItem = (subnetIndex: number): JSX.Element => {
+    const subnet = calcSubnet(props.netAddr, props.hostId, subnetIndex);
+    return (
+      <SubnetItem
+        key={addrToStr(subnet.network)}
+        subnet={subnet}
+        subnetIndex={subnetIndex}
+      />
+    );
+  }
 
   return (
     <section>
@@ -38,13 +50,8 @@ const SubnetsTable: React.FC<Props> = (props) => {
               <div className="cell">Last host</div>
               <div className="cell">Broadcast address</div>
             </div>
-            {[...Array(subnetsCnt > maxSubnets ? maxSubnets : subnetsCnt)].map((v, i) => 
-              <SubnetItem
-                key={i}
-                netAddr={props.netAddr}
-                hostId={props.hostId}
-                subnetIndex={i}
-              />
+            {[...Array(subnetsCnt > maxSubnets ? maxSubnets : subnetsCnt)].map(
+              (v, i) => buildSubnetItem(i)
             )}
           </div>
         </div>

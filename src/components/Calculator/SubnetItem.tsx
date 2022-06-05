@@ -1,55 +1,28 @@
 import React from "react";
+import { addrToStr, Subnet } from "../../logics/addrUtils";
 
 interface Props {
-  netAddr: number[];
-  hostId: number;
+  subnet: Subnet;
   subnetIndex: number;
 }
 
 const SubnetItem: React.FC<Props> = (props) => {
-  const addrToStr = (addr: number[]): string => {
-    return `${addr[0]}.${addr[1]}.${addr[2]}.${addr[3]}`;
-  }
-
-  const addrSum = (addr: number[], n: number): number[] => {
-    addr = [...addr];
-    let i = 3;
-    while (true) {
-      addr[i] += n;
-      if (addr[i] <= 255) {
-        break;
-      }
-      addr[i] = n % 256;
-      n = Math.floor(n / 256);
-      i--;
-    }
-    return addr;
-  }
-
-  const addressesCnt = Math.pow(2, props.hostId);
-  const subnetAddr = addrSum(props.netAddr, addressesCnt*props.subnetIndex);
-
   return (
     <div className="row">
       <div className="cell">
-        {/* Subnet */}
         {props.subnetIndex + 1}
       </div>
       <div className="cell">
-        {/* Network address */}
-        {addrToStr(subnetAddr)}
+        {addrToStr(props.subnet.network)}
       </div>
       <div className="cell">
-        {/* First host */}
-        {addrToStr(addrSum(subnetAddr, 1))}
+        {addrToStr(props.subnet.firstHost)}
         </div>
       <div className="cell">
-        {/* Last host */}
-        {addrToStr(addrSum(subnetAddr, addressesCnt-2))}
+        {addrToStr(props.subnet.lastHost)}
       </div>
       <div className="cell">
-        {/* Broadcast address */}
-        {addrToStr(addrSum(subnetAddr, addressesCnt-1))}
+        {addrToStr(props.subnet.broadcast)}
       </div>
     </div>
   );
