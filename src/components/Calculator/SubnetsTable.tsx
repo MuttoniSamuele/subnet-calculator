@@ -41,7 +41,11 @@ const SubnetsTable: React.FC<Props> = (props) => {
             `${props.netAddr[3]}/${32-props.hostId}`
           }
         </div>
-        <DownloadBtn />
+        <DownloadBtn
+          netAddr={props.netAddr}
+          subnetId={props.subnetId}
+          hostId={props.hostId}
+        />
       </div>
 
       <div className="table-container">

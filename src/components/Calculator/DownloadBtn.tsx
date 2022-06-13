@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import DownloadPopup from "./DownloadPopup";
 
 interface Props {
-
+  netAddr: number[];
+  subnetId: number;
+  hostId: number;
 }
 
 const DownloadBtn: React.FC<Props> = (props) => {
@@ -24,6 +26,9 @@ const DownloadBtn: React.FC<Props> = (props) => {
       >Download</button>
       {isPopupOpen &&
         <DownloadPopup
+          netAddr={props.netAddr}
+          subnetId={props.subnetId}
+          hostId={props.hostId}
           onClose={handleClose}
         />
       }
