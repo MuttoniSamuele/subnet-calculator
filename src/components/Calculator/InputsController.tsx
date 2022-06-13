@@ -183,7 +183,7 @@ const InputsController: React.FC<Props> = (props) => {
         }}
       />
       <button
-        className="calculate-btn"
+        className="primary-btn calculate-btn"
         disabled={ipAddr === null || !hasMaskBits}
         onClick={handleCalculate}
       >

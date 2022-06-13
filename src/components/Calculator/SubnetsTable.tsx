@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import SubnetItem from "./SubnetItem";
 import { calcSubnet, addrToStr } from "../../logics/addrUtils";
+import DownloadBtn from "./DownloadBtn";
 
 const MAX_SUBNETS = 128; // max number of subnets to load at a time
 
@@ -31,13 +32,16 @@ const SubnetsTable: React.FC<Props> = (props) => {
 
   return (
     <section>
-      <div className="subnets-desc">
-        {props.subnetId === 0 ? "Showing the only possible subnet"
-        : `Showing all ${subnetsCnt} of the possible subnets`
-        }{
-          ` for ${props.netAddr[0]}.${props.netAddr[1]}.${props.netAddr[2]}.` +
-          `${props.netAddr[3]}/${32-props.hostId}`
-        }
+      <div className="desc-download-wrapper">
+        <div className="subnets-desc">
+          {props.subnetId === 0 ? "Showing the only possible subnet"
+          : `Showing all ${subnetsCnt} of the possible subnets`
+          }{
+            ` for ${props.netAddr[0]}.${props.netAddr[1]}.${props.netAddr[2]}.` +
+            `${props.netAddr[3]}/${32-props.hostId}`
+          }
+        </div>
+        <DownloadBtn />
       </div>
 
       <div className="table-container">
