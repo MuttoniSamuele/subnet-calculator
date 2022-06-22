@@ -383,6 +383,12 @@ h1 {
   border: none;
 }
 
+.popup-checkbox-container input:focus-visible ~ .checkmark {
+  outline: 3px solid black;
+  outline-offset: -3px;
+  border: none;
+}
+
 .popup-checkbox-container input:checked ~ .checkmark:after {
   display: block;
 }
