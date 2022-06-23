@@ -342,10 +342,10 @@ h1 {
 .popup-checkbox-container {
   position: relative;
   display: block;
+  line-height: 1.5rem;
   margin: 2rem 1rem;
-  cursor: pointer;
   padding-left: 2rem;
-  padding-bottom: 0.5rem;
+  cursor: pointer;
 }
 
 .popup-checkbox-container input {
@@ -358,7 +358,7 @@ h1 {
 
 .checkmark {
   position: absolute;
-  top: 0.2rem;
+  top: 0;
   left: 0;
   height: 1.5rem;
   width: 1.5rem;
@@ -398,6 +398,7 @@ h1 {
   display: flex;
   justify-content: center;
   margin-top: 2.5rem;
+  font-size: 1.2rem;
 }
 
 
@@ -438,5 +439,17 @@ h1 {
 
   .input-wrapper input.large {
     width: 5rem;
+  }
+
+  .warn-note-title {
+    font-size: 1rem;
+  }
+
+  .warn-note-content {
+    font-size: 0.9rem;
+  }
+
+  .popup-checkbox-container {
+    font-size: 1.05rem;
   }
 }
