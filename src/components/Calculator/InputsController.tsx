@@ -9,11 +9,24 @@ interface Props {
 
 const InputsController: React.FC<Props> = (props) => {
   enum InputType { IP_ADDR, MASK_BITS, SUB_MASK, SUBNETS, HOSTS, NONE };
+  type IpClass = "A" | "B" | "C";
 
   const [ipAddr, setIpAddr] = useState<number[] | null>(null);
   const [netId, setNetId] = useState<number | null>(null);
   const [subnetId, setSubnetId] = useState<number | null>(null);
   const [focusedInput, setFocusedInput] = useState<InputType>(InputType.NONE);
+
+  const getIpClass = (ip: number[]): IpClass | null => {
+    const octect = decToBin(ip[0], 8);
+    if (octect[0] === 0) {
+      return "A";
+    } else if (octect[1] === 0) {
+      return "B";
+    } else if (octect[2] === 0) {
+      return "C";
+    }
+    return null;
+  }
 
   const calcSubnetMask = (netId: number, subnetId: number): number[] => {
     const mask = [0, 0, 0, 0];
@@ -36,19 +49,30 @@ const InputsController: React.FC<Props> = (props) => {
       setIpAddr(null);
       return;
     }
-    const octect = decToBin(ip[0], 8);
-    if (octect[0] === 0) {  // Class A
-      setNetId(8);
-    } else if (octect[1] === 0) {  // Class B
-      setNetId(16);
-    } else if (octect[2] === 0) {  // Class C
-      setNetId(24);
-    } else {
-      setNetId(null);
-      setIpAddr(null);
-      return;
+    const ipClass = getIpClass(ip);
+    switch (ipClass) {
+      case "A": {
+        setNetId(8);
+        break;
+      }
+      case "B": {
+        setNetId(16);
+        break;
+      }
+      case "C": {
+        setNetId(24);
+        break;
+      }
+      default: {
+        setNetId(null);
+        setIpAddr(null);
+        return;  
+      }
     }
-    setSubnetId(0);
+    if (subnetId === null || ipAddr === null ||
+        ipClass !== getIpClass(ipAddr)) {
+      setSubnetId(0);
+    }
     setIpAddr(ip);
   }
 
