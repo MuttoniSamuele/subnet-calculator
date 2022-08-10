@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from "react";
+import { IpAddr } from "../../logics/addrUtils";
 
 interface Props {
   label: string;
-  value?: number[] | null;
+  value?: IpAddr | null;
   disabled?: boolean
-  onChange: (octects: number[] | null) => void;
+  onChange: (octects: IpAddr | null) => void;
 }
 
 const IpInput: React.FC<Props> = (props) => {
-  const [octects, setOctects] = useState<(number | null)[]>(
-    props.value ? props.value as (number | null)[] : Array(4).fill(null)
+  type RawIpAddr = [number | null, number | null, number | null, number | null];
+
+  const [octects, setOctects] = useState<RawIpAddr>(
+    props.value ? props.value : Array(4).fill(null) as RawIpAddr
   );
 
   useEffect(() => {
     if (props.value !== undefined) {
-      setOctects(props.value !== null ? props.value as (number | null)[] : Array(4).fill(null));
+      setOctects(props.value !== null ? props.value : Array(4).fill(null) as RawIpAddr);
     }
   }, [props.value]);
 
@@ -33,10 +36,10 @@ const IpInput: React.FC<Props> = (props) => {
     if ((octect === null || isNaN(Number(e.target.value))) && e.target.value.length > 0) {
       return;
     }
-    const octectsTemp = [...octects];
+    const octectsTemp: RawIpAddr = [...octects];
     octectsTemp[octectIndex] = octect;
     if (!octectsTemp.some((o) => o === null)) {
-      props.onChange(octectsTemp as number[]);
+      props.onChange(octectsTemp as IpAddr);
     } else {
       props.onChange(null);
     }

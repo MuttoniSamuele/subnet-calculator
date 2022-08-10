@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import InputsController from "./InputsController";
 import SubnetsTable from "./SubnetsTable";
+import { IpAddr } from "../../logics/addrUtils";
 
 const Calculator: React.FC = () => {
-  const [netAddr, setNetAddr] = useState<number[]>();
+  const [netAddr, setNetAddr] = useState<IpAddr>();
   const [subnetId, setSubnetId] = useState<number>();
   const [hostId, setHostId] = useState<number>();
 

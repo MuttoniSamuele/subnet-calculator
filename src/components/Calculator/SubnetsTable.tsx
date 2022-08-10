@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import SubnetItem from "./SubnetItem";
-import { calcSubnet, addrToStr } from "../../logics/addrUtils";
 import DownloadBtn from "./DownloadBtn";
+import { calcSubnet, addrToStr, IpAddr } from "../../logics/addrUtils";
 
 const MAX_SUBNETS = 128; // max number of subnets to load at a time
 
 interface Props {
-  netAddr: number[];
+  netAddr: IpAddr;
   subnetId: number;
   hostId: number;
 }

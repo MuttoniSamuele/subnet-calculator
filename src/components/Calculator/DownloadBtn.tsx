@@ -1,8 +1,9 @@
 import React, { useState, useRef } from "react";
 import DownloadPopup from "./DownloadPopup";
+import { IpAddr } from "../../logics/addrUtils";
 
 interface Props {
-  netAddr: number[];
+  netAddr: IpAddr;
   subnetId: number;
   hostId: number;
 }

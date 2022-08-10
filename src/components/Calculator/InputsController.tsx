@@ -2,34 +2,22 @@ import React, { useState } from "react";
 import IpInput from "./IpInput";
 import PosNumInput from "./PosNumInput";
 import { decToBin, binToDec } from "../../logics/binary";
+import { getAddrClass, IpAddr } from "../../logics/addrUtils";
 
 interface Props {
-  onCalculate: (netAddr: number[], subnetId: number, hostId: number) => void;
+  onCalculate: (netAddr: IpAddr, subnetId: number, hostId: number) => void;
 }
 
 const InputsController: React.FC<Props> = (props) => {
   enum InputType { IP_ADDR, MASK_BITS, SUB_MASK, SUBNETS, HOSTS, NONE };
-  type IpClass = "A" | "B" | "C";
 
-  const [ipAddr, setIpAddr] = useState<number[] | null>(null);
+  const [ipAddr, setIpAddr] = useState<IpAddr | null>(null);
   const [netId, setNetId] = useState<number | null>(null);
   const [subnetId, setSubnetId] = useState<number | null>(null);
   const [focusedInput, setFocusedInput] = useState<InputType>(InputType.NONE);
 
-  const getIpClass = (ip: number[]): IpClass | null => {
-    const octect = decToBin(ip[0], 8);
-    if (octect[0] === 0) {
-      return "A";
-    } else if (octect[1] === 0) {
-      return "B";
-    } else if (octect[2] === 0) {
-      return "C";
-    }
-    return null;
-  }
-
-  const calcSubnetMask = (netId: number, subnetId: number): number[] => {
-    const mask = [0, 0, 0, 0];
+  const calcSubnetMask = (netId: number, subnetId: number): IpAddr => {
+    const mask: IpAddr = [0, 0, 0, 0];
     let maskBits = netId + subnetId;
     for (let i = 0; i < 4; i++) {
       if (maskBits >= 8) {
@@ -43,13 +31,13 @@ const InputsController: React.FC<Props> = (props) => {
     return mask;
   }
 
-  const handleIpChange = (ip: number[] | null): void => {
+  const handleIpChange = (ip: IpAddr | null): void => {
     if (!ip) {
       setNetId(null);
       setIpAddr(null);
       return;
     }
-    const ipClass = getIpClass(ip);
+    const ipClass = getAddrClass(ip);
     switch (ipClass) {
       case "A": {
         setNetId(8);
@@ -70,7 +58,7 @@ const InputsController: React.FC<Props> = (props) => {
       }
     }
     if (subnetId === null || ipAddr === null ||
-        ipClass !== getIpClass(ipAddr)) {
+        ipClass !== getAddrClass(ipAddr)) {
       setSubnetId(0);
     }
     setIpAddr(ip);
@@ -89,7 +77,7 @@ const InputsController: React.FC<Props> = (props) => {
     setSubnetId(newSubnetId);
   }
 
-  const handleSubMaskChange = (mask: number[] | null): void => {
+  const handleSubMaskChange = (mask: IpAddr | null): void => {
     if (!mask) {
       setSubnetId(null);
       return;
@@ -135,7 +123,7 @@ const InputsController: React.FC<Props> = (props) => {
     if (ipAddr === null || !hasMaskBits) {
       return;
     }
-    const netAddr = [...ipAddr];
+    const netAddr: IpAddr = [...ipAddr];
     for (let i = 0; i < 4; i++) {
       if (netId <= i*8) {
         netAddr[i] = 0;

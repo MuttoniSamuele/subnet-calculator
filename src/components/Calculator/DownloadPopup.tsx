@@ -2,13 +2,13 @@ import React, { useState, useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import FocusTrap from "focus-trap-react";
 import WarningNote from "./WarningNote";
-import { calcSubnet } from "../../logics/addrUtils";
+import { calcSubnet, IpAddr } from "../../logics/addrUtils";
 import { downloadCsv } from "../../logics/csv";
 
 const MAX_SUBNETS = 8192; // max number of subnets in the CSV
 
 interface Props {
-  netAddr: number[];
+  netAddr: IpAddr;
   subnetId: number;
   hostId: number;
   onClose: () => void;
@@ -27,7 +27,7 @@ const DownloadPopup: React.FC<Props> = (props) => {
     };
   }, []);
 
-  const addrToStrArr = (addr: number[]) => {
+  const addrToStrArr = (addr: IpAddr) => {
     return addr.map((v): string => v.toString());
   }
 
