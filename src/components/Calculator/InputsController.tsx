@@ -113,7 +113,7 @@ const InputsController: React.FC<Props> = (props) => {
       setSubnetId(null);
       return;
     }
-    const newHostId = Math.ceil(Math.log(hosts + 3) / Math.log(2));
+    const newHostId = Math.ceil(Math.log(hosts + 2) / Math.log(2));
     handleMaskBitsChange(32 - newHostId);
   }
 
@@ -183,7 +183,7 @@ const InputsController: React.FC<Props> = (props) => {
       <PosNumInput
         label="Hosts per Subnet"
         value={focusedInput === InputType.HOSTS ? undefined
-          : hasMaskBits ? Math.pow(2, 32-netId-subnetId)-3
+          : hasMaskBits ? Math.pow(2, 32-netId-subnetId)-2
           : null
         }
         max={Math.pow(2, 32)}
